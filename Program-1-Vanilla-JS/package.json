@@ -1,0 +1,19 @@
+{
+  "name": "program-1-vanilla-js",
+  "version": "1.0.0",
+  "description": "Program 1: College Event Registration Interface using Vanilla HTML5, CSS3, and JavaScript",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "html5",
+    "css3",
+    "javascript",
+    "dom-manipulation",
+    "fetch-api",
+    "async-await"
+  ],
+  "author": "Full Stack Development Academic Exercise",
+  "license": "MIT"
+}

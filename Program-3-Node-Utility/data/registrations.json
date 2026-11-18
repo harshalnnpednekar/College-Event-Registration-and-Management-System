@@ -1,0 +1,13 @@
+[
+  {
+    "id": 101,
+    "eventId": 1,
+    "eventTitle": "National Hackathon 2026: CodeCrafters",
+    "studentName": "Alex Rivera",
+    "studentRoll": "CS2026-001",
+    "studentEmail": "alex.rivera@college.edu",
+    "studentDept": "Computer Science & Engineering",
+    "status": "Confirmed",
+    "registeredAt": "2026-11-15T08:30:00.000Z"
+  }
+]

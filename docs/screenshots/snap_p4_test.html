@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 4 API Test Suite</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; padding: 2rem; background: #090d16; font-family: 'JetBrains Mono', monospace; color: #e2e8f0; display: flex; justify-content: center; }
+    .term-window { width: 100%; max-width: 1100px; background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); }
+    .term-titlebar { background: #1e293b; padding: 0.75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #334155; }
+    .dots { display: flex; gap: 0.5rem; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red { background: #ef4444; } .dot-yellow { background: #f59e0b; } .dot-green { background: #10b981; }
+    .term-body { padding: 1.75rem; font-size: 0.88rem; line-height: 1.6; }
+    .green { color: #34d399; font-weight: 700; }
+    .cyan { color: #38bdf8; font-weight: 600; }
+    .amber { color: #fbbf24; }
+  </style>
+</head>
+<body>
+  <div class="term-window">
+    <div class="term-titlebar">
+      <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+      <span style="font-size: 0.85rem; font-weight: 600; color: #94a3b8;">Program 4 Automated API Verification &bull; Roll No: 41</span>
+      <span style="font-size: 0.75rem; color: #64748b;">PostgreSQL 18.6 &bull; pg Client</span>
+    </div>
+    <div class="term-body">
+      <div style="color: #94a3b8; margin-bottom: 1rem;">PS C:\Users\harsh\College-Event-Registration-and-Management-System\Program-4-Express-API&gt; <span style="color: #fff; font-weight: 700;">node tests/api.test.js</span></div>
+      <div class="cyan">===============================================================</div>
+      <div class="cyan"> PROGRAM 4: Express REST API &amp; PostgreSQL Automated Test Suite</div>
+      <div class="cyan">===============================================================</div>
+      <br>
+      <div><span class="green">&#10004; PASS:</span> GET / returns system status and endpoint map</div>
+      <div><span class="green">&#10004; PASS:</span> POST /api/auth/register creates new student account (bcrypt salted hash)</div>
+      <div><span class="green">&#10004; PASS:</span> POST /api/auth/login authenticates Admin credentials &amp; issues JWT</div>
+      <div><span class="green">&#10004; PASS:</span> GET /api/auth/me verifies JWT Bearer token and returns profile</div>
+      <div><span class="green">&#10004; PASS:</span> GET /api/events retrieves events catalogue from PostgreSQL</div>
+      <div><span class="green">&#10004; PASS:</span> POST /api/events creates a new event (Admin privileges verified)</div>
+      <div><span class="green">&#10004; PASS:</span> POST /api/events rejects non-admin student with 403 Forbidden</div>
+      <div><span class="green">&#10004; PASS:</span> PUT /api/events/:id updates event details and capacity</div>
+      <div><span class="green">&#10004; PASS:</span> POST /api/registrations executes atomic transactional seat booking</div>
+      <div><span class="green">&#10004; PASS:</span> POST /api/registrations rejects duplicate registration with 409 Conflict</div>
+      <div><span class="green">&#10004; PASS:</span> GET /api/registrations/my returns student registered bookings via SQL joins</div>
+      <div><span class="green">&#10004; PASS:</span> GET /api/registrations/all lists all registrations for Admin</div>
+      <div><span class="green">&#10004; PASS:</span> GET /api/registrations/stats computes real-time analytics &amp; seat utilization</div>
+      <div><span class="green">&#10004; PASS:</span> DELETE /api/registrations/:id cancels registration and restores seat count</div>
+      <div><span class="green">&#10004; PASS:</span> DELETE /api/events/:id removes event and cascades associated records</div>
+      <br>
+      <div class="green" style="font-size: 1.05rem; border-top: 1px dashed #334155; padding-top: 1rem;">
+        ===============================================================<br>
+        &#10004; API Tests Summary: 15 Passed, 0 Failed. All Endpoints Operational.<br>
+        ===============================================================
+      </div>
+    </div>
+  </div>
+</body>
+</html>

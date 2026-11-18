@@ -1,0 +1,21 @@
+{
+  "name": "program-3-node-utility",
+  "version": "1.0.0",
+  "description": "Program 3: Node.js Server-Side Utility without Express using Streams, EventEmitter, and File System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "cli": "node cli.js",
+    "test": "node test-utility.js"
+  },
+  "keywords": [
+    "nodejs",
+    "http",
+    "streams",
+    "event-emitter",
+    "fs",
+    "no-express"
+  ],
+  "author": "Full Stack Development Academic Exercise",
+  "license": "MIT"
+}

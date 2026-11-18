@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Event Registration & Management System | Program 1 (Vanilla JS)</title>
+  <link rel="stylesheet" href="../../Program-1-Vanilla-JS/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="brand-icon">🎓</div>
+        <div class="brand-text">
+          <span class="brand-title">CampusPulse Events</span>
+          <span class="brand-badge">Program 1 &bull; Vanilla JS</span>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <button id="viewRegistrationsBtn" class="btn btn-secondary">
+          <span class="icon">📋</span> My Registrations (<span id="regCounter">1</span>)
+        </button>
+        <button id="openRegisterModalBtn" class="btn btn-primary">
+          <span class="icon">✍️</span> Register Now
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <div class="hero-badge">Academic Year 2026-2027</div>
+      <h1 class="hero-title">College Event Registration & Management Portal</h1>
+      <p class="hero-subtitle">
+        Explore hackathons, cultural fests, hands-on workshops, seminars, and sports tournaments. 
+        Register seamlessly with real-time seat availability updates.
+      </p>
+
+      <!-- Live Quick Stats -->
+      <div class="stats-ribbon">
+        <div class="stat-card">
+          <div class="stat-num" id="statTotalEvents">6</div>
+          <div class="stat-label">Total Events</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statTotalSeats">960</div>
+          <div class="stat-label">Total Seats</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statAvailableSeats">185</div>
+          <div class="stat-label">Available Seats</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statMyRegistrations">1</div>
+          <div class="stat-label">My Registrations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Search Controls -->
+  <main class="container main-content">
+    <section class="filter-panel" aria-label="Filter events">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Search by event title, speaker, venue or tags..." 
+          autocomplete="off"
+        >
+        <button id="clearSearchBtn" class="clear-btn" title="Clear search" style="display: none;">&times;</button>
+      </div>
+
+      <div class="filter-controls">
+        <div class="filter-group">
+          <label for="categoryFilter">Category:</label>
+          <select id="categoryFilter">
+            <option value="All">All Categories</option>
+            <option value="Technical">Technical</option>
+            <option value="Cultural">Cultural</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Sports">Sports</option>
+            <option value="Seminar">Seminar</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="statusFilter">Status:</label>
+          <select id="statusFilter">
+            <option value="All">All Statuses</option>
+            <option value="Open">Open</option>
+            <option value="Fast Filling">Fast Filling</option>
+            <option value="Closed">Closed / Full</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="sortBy">Sort By:</label>
+          <select id="sortBy">
+            <option value="date-asc">Date (Earliest First)</option>
+            <option value="date-desc">Date (Latest First)</option>
+            <option value="seats-desc">Seats Available (High to Low)</option>
+            <option value="seats-asc">Seats Available (Low to High)</option>
+            <option value="title-asc">Title (A &rarr; Z)</option>
+            <option value="title-desc">Title (Z &rarr; A)</option>
+          </select>
+        </div>
+
+        <button id="resetFiltersBtn" class="btn btn-outline" title="Reset all filters">
+          Reset Filters
+        </button>
+      </div>
+    </section>
+
+    <!-- Active Filters & Result Count -->
+    <div class="results-meta">
+      <span id="resultsCount">Showing 6 of 6 events</span>
+      <div id="activeFilterTags" class="active-filter-tags"></div>
+    </div>
+
+    <!-- Event Cards Grid -->
+    <section id="eventGrid" class="event-grid">
+      <article class="event-card">
+        <div class="card-header">
+          <span class="category-badge category-Technical">Technical</span>
+          <span class="status-badge status-Open">Open</span>
+        </div>
+        <h3 class="event-title">National Hackathon 2026: CodeCrafters</h3>
+        <p class="event-desc">36-hour non-stop hackathon challenging students to build innovative AI, Web3, and IoT solutions for real-world problems.</p>
+        <div class="event-meta">
+          <div class="meta-row"><span class="meta-icon">📅</span><span>20/11/2026</span></div>
+          <div class="meta-row"><span class="meta-icon">📍</span><span>Campus Innovation Hub & Lab 4</span></div>
+          <div class="meta-row"><span class="meta-icon">🎙️</span><span>Dr. Sarah Jenkins (Lead AI Architect, TechCorp)</span></div>
+        </div>
+        <div class="seat-progress-box">
+          <div class="seat-progress-label">
+            <span>Availability: 24 / 120 seats</span>
+            <span>80% filled</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill green" style="width: 80%"></div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-secondary">View Details</button>
+          <button class="btn btn-primary" >Register</button>
+        </div>
+      </article>
+    
+
+      <article class="event-card">
+        <div class="card-header">
+          <span class="category-badge category-Cultural">Cultural</span>
+          <span class="status-badge status-Open">Open</span>
+        </div>
+        <h3 class="event-title">Aura 2026: Annual Inter-College Cultural Fest</h3>
+        <p class="event-desc">A vibrant celebration of music, dance, theatrical acts, photography exhibitions, and battle of the college bands.</p>
+        <div class="event-meta">
+          <div class="meta-row"><span class="meta-icon">📅</span><span>25/11/2026</span></div>
+          <div class="meta-row"><span class="meta-icon">📍</span><span>Main University Auditorium</span></div>
+          <div class="meta-row"><span class="meta-icon">🎙️</span><span>Cultural Committee & Celebrity Guests</span></div>
+        </div>
+        <div class="seat-progress-box">
+          <div class="seat-progress-label">
+            <span>Availability: 85 / 500 seats</span>
+            <span>83% filled</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill green" style="width: 83%"></div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-secondary">View Details</button>
+          <button class="btn btn-primary" >Register</button>
+        </div>
+      </article>
+    
+
+      <article class="event-card">
+        <div class="card-header">
+          <span class="category-badge category-Workshop">Workshop</span>
+          <span class="status-badge status-Fast-Filling">Fast Filling</span>
+        </div>
+        <h3 class="event-title">Generative AI & LLM Systems Hands-on Workshop</h3>
+        <p class="event-desc">Master prompt engineering, retrieval-augmented generation (RAG), vector embeddings, and LangChain integration.</p>
+        <div class="event-meta">
+          <div class="meta-row"><span class="meta-icon">📅</span><span>22/11/2026</span></div>
+          <div class="meta-row"><span class="meta-icon">📍</span><span>Computer Center Room 201</span></div>
+          <div class="meta-row"><span class="meta-icon">🎙️</span><span>Prof. Alan Verma (Machine Learning Faculty)</span></div>
+        </div>
+        <div class="seat-progress-box">
+          <div class="seat-progress-label">
+            <span>Availability: 4 / 60 seats</span>
+            <span>93% filled</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill amber" style="width: 93%"></div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-secondary">View Details</button>
+          <button class="btn btn-primary" >Register</button>
+        </div>
+      </article>
+    
+
+      <article class="event-card">
+        <div class="card-header">
+          <span class="category-badge category-Sports">Sports</span>
+          <span class="status-badge status-Open">Open</span>
+        </div>
+        <h3 class="event-title">Inter-Department Cricket & Football Tournament</h3>
+        <p class="event-desc">Annual sporting extravaganza featuring T20 cricket clashes, 7-a-side football matches, and track & field heats.</p>
+        <div class="event-meta">
+          <div class="meta-row"><span class="meta-icon">📅</span><span>28/11/2026</span></div>
+          <div class="meta-row"><span class="meta-icon">📍</span><span>University Sports Ground</span></div>
+          <div class="meta-row"><span class="meta-icon">🎙️</span><span>Coach Vikram Rathore (Sports Director)</span></div>
+        </div>
+        <div class="seat-progress-box">
+          <div class="seat-progress-label">
+            <span>Availability: 60 / 150 seats</span>
+            <span>60% filled</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill green" style="width: 60%"></div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-secondary">View Details</button>
+          <button class="btn btn-primary" >Register</button>
+        </div>
+      </article>
+    
+
+      <article class="event-card">
+        <div class="card-header">
+          <span class="category-badge category-Seminar">Seminar</span>
+          <span class="status-badge status-Closed">Closed</span>
+        </div>
+        <h3 class="event-title">Future of Cloud Computing & DevOps Seminar</h3>
+        <p class="event-desc">Industry keynote on microservices architectures, Kubernetes orchestration, CI/CD pipelines, and cloud security.</p>
+        <div class="event-meta">
+          <div class="meta-row"><span class="meta-icon">📅</span><span>30/11/2026</span></div>
+          <div class="meta-row"><span class="meta-icon">📍</span><span>Seminar Hall B (Block 3)</span></div>
+          <div class="meta-row"><span class="meta-icon">🎙️</span><span>Rohan Mehra (DevOps Architect, CloudScale)</span></div>
+        </div>
+        <div class="seat-progress-box">
+          <div class="seat-progress-label">
+            <span>Availability: 0 / 80 seats</span>
+            <span>100% filled</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill red" style="width: 100%"></div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-secondary">View Details</button>
+          <button class="btn btn-primary" disabled>Sold Out</button>
+        </div>
+      </article>
+    
+
+      <article class="event-card">
+        <div class="card-header">
+          <span class="category-badge category-Workshop">Workshop</span>
+          <span class="status-badge status-Open">Open</span>
+        </div>
+        <h3 class="event-title">CyberShield: Ethical Hacking & Security Bootcamp</h3>
+        <p class="event-desc">Learn penetration testing fundamentals, web application security (OWASP Top 10), and capture-the-flag (CTF) challenges.</p>
+        <div class="event-meta">
+          <div class="meta-row"><span class="meta-icon">📅</span><span>5/12/2026</span></div>
+          <div class="meta-row"><span class="meta-icon">📍</span><span>Cyber Security Research Lab</span></div>
+          <div class="meta-row"><span class="meta-icon">🎙️</span><span>Maya Iyer (Certified Ethical Hacker & Analyst)</span></div>
+        </div>
+        <div class="seat-progress-box">
+          <div class="seat-progress-label">
+            <span>Availability: 12 / 50 seats</span>
+            <span>76% filled</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill amber" style="width: 76%"></div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-secondary">View Details</button>
+          <button class="btn btn-primary" >Register</button>
+        </div>
+      </article>
+    </section>
+
+    <!-- Loading & Empty States -->
+    <div id="loadingIndicator" class="state-card loading-card" style="display: none;">
+      <div class="spinner"></div>
+      <p>Loading events catalogue...</p>
+    </div>
+
+    <div id="emptyState" class="state-card empty-card" style="display: none;">
+      <div class="empty-icon">🎭</div>
+      <h3>No matching events found</h3>
+      <p>Try adjusting your search query, category, or status filters.</p>
+      <button class="btn btn-secondary" onclick="document.getElementById('resetFiltersBtn').click()">
+        Clear All Filters
+      </button>
+    </div>
+  </main>
+
+  <!-- Modal: Event Details -->
+  <div id="detailsModal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3 id="modalEventTitle" class="modal-title">Event Details</h3>
+        <button class="close-btn" data-close="detailsModal">&times;</button>
+      </div>
+      <div class="modal-body" id="modalEventDetailsBody">
+        <!-- Injected dynamically -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close="detailsModal">Close</button>
+        <button id="modalRegisterCtaBtn" class="btn btn-primary">Proceed to Register</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Registration Form -->
+  <div id="registerModal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Student Event Registration</h3>
+        <button class="close-btn" data-close="registerModal">&times;</button>
+      </div>
+      <form id="registrationForm" novalidate>
+        <div class="modal-body">
+          <div class="form-alert" id="formAlert" style="display: none;"></div>
+
+          <div class="form-group">
+            <label for="regEventSelect">Select Event <span class="required">*</span></label>
+            <select id="regEventSelect" name="eventId" required>
+              <option value="">-- Choose an Event --</option>
+            </select>
+            <div class="form-hint" id="selectedEventSeatHint"></div>
+            <div class="error-msg" id="err-regEventSelect"></div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="studentName">Full Name <span class="required">*</span></label>
+              <input type="text" id="studentName" name="studentName" placeholder="e.g. John Doe" required>
+              <div class="error-msg" id="err-studentName"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="studentRoll">Roll Number / ID <span class="required">*</span></label>
+              <input type="text" id="studentRoll" name="studentRoll" placeholder="e.g. CS2026-042" required>
+              <div class="error-msg" id="err-studentRoll"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="studentEmail">College Email <span class="required">*</span></label>
+              <input type="email" id="studentEmail" name="studentEmail" placeholder="e.g. john@college.edu" required>
+              <div class="error-msg" id="err-studentEmail"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="studentPhone">Phone Number <span class="required">*</span></label>
+              <input type="tel" id="studentPhone" name="studentPhone" placeholder="10-digit mobile" maxlength="10" required>
+              <div class="error-msg" id="err-studentPhone"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="studentDept">Department <span class="required">*</span></label>
+              <select id="studentDept" name="studentDept" required>
+                <option value="">-- Select Department --</option>
+                <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Electronics & Communication">Electronics & Communication</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="Management Studies (MBA)">Management Studies (MBA)</option>
+              </select>
+              <div class="error-msg" id="err-studentDept"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="studentSemester">Semester <span class="required">*</span></label>
+              <select id="studentSemester" name="studentSemester" required>
+                <option value="">-- Semester --</option>
+                <option value="Semester 1">Semester 1</option>
+                <option value="Semester 2">Semester 2</option>
+                <option value="Semester 3">Semester 3</option>
+                <option value="Semester 4">Semester 4</option>
+                <option value="Semester 5">Semester 5</option>
+                <option value="Semester 6">Semester 6</option>
+                <option value="Semester 7">Semester 7</option>
+                <option value="Semester 8">Semester 8</option>
+              </select>
+              <div class="error-msg" id="err-studentSemester"></div>
+            </div>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="termsAgreement" required>
+              <span>I agree to attend punctually and abide by the college event guidelines.</span>
+            </label>
+            <div class="error-msg" id="err-termsAgreement"></div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="registerModal">Cancel</button>
+          <button type="submit" id="submitRegBtn" class="btn btn-primary">
+            Confirm Registration
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Drawer: My Registrations -->
+  <div id="registrationsDrawer" class="drawer-backdrop show" aria-hidden="false">
+    <div class="drawer">
+      <div class="drawer-header">
+        <h3 class="drawer-title">📋 My Event Registrations</h3>
+        <button class="close-btn" id="closeDrawerBtn">&times;</button>
+      </div>
+      <div class="drawer-body">
+        <div id="drawerEmptyNotice" class="drawer-empty" style="display: none;">
+          <p>You haven't registered for any events yet.</p>
+        </div>
+        <div id="drawerList" class="drawer-list">
+    <div class="reg-item">
+      <div class="reg-item-title">National Hackathon 2026: CodeCrafters</div>
+      <div class="reg-item-meta">Registration ID: #REG-17947388 &bull; Status: Confirmed</div>
+      <div class="reg-item-student">
+        <strong>Alex Rivera (Roll No: 41)</strong> (AI2026-041)<br>
+        <span style="color: var(--text-muted); font-size: 0.75rem;">Artificial Intelligence and Data Science &bull; alex.rivera@college.edu</span>
+      </div>
+      <button class="btn btn-danger btn-sm" style="width: 100%; font-size: 0.75rem; padding: 0.4rem;">Cancel Registration</button>
+    </div>
+  </div>
+      </div>
+      <div class="drawer-footer">
+        <button class="btn btn-outline" id="clearAllRegsBtn">Clear Local Records</button>
+        <button class="btn btn-secondary" data-close-drawer>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p><strong>CampusPulse</strong> &bull; College Event Registration and Management System</p>
+      <p class="footer-sub">Program 1: HTML5, CSS3, DOM Manipulation, Fetch API, and Async/Await.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

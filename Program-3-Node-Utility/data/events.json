@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "National Hackathon 2026: CodeCrafters",
+    "category": "Technical",
+    "description": "36-hour non-stop hackathon challenging students to build innovative AI, Web3, and IoT solutions.",
+    "venue": "Campus Innovation Hub & Lab 4",
+    "event_date": "2026-11-20T09:00:00.000Z",
+    "total_seats": 100,
+    "available_seats": 25,
+    "status": "Open",
+    "speaker": "Dr. Sarah Jenkins"
+  },
+  {
+    "id": 2,
+    "title": "Aura 2026: Annual Cultural Fest",
+    "category": "Cultural",
+    "description": "Grand cultural festival celebrating music, dance, theatrical arts, and band competitions.",
+    "venue": "Main University Auditorium",
+    "event_date": "2026-11-25T17:00:00.000Z",
+    "total_seats": 400,
+    "available_seats": 70,
+    "status": "Open",
+    "speaker": "Cultural Committee"
+  },
+  {
+    "id": 3,
+    "title": "Generative AI & LLM Systems Hands-on Workshop",
+    "category": "Workshop",
+    "description": "Master prompt engineering, retrieval-augmented generation (RAG), and LangChain integration.",
+    "venue": "Computer Center Room 201",
+    "event_date": "2026-11-22T10:30:00.000Z",
+    "total_seats": 50,
+    "available_seats": 3,
+    "status": "Fast Filling",
+    "speaker": "Prof. Alan Verma"
+  },
+  {
+    "id": 4,
+    "title": "Cloud Architecture & Kubernetes Seminar",
+    "category": "Seminar",
+    "description": "High-level insights into distributed computing, microservices scaling, and modern cloud deployment.",
+    "venue": "Seminar Hall B (Block 3)",
+    "event_date": "2026-11-30T14:00:00.000Z",
+    "total_seats": 60,
+    "available_seats": 0,
+    "status": "Closed",
+    "speaker": "Rohan Mehra"
+  }
+]
